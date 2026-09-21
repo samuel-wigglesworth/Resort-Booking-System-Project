@@ -1,9 +1,0 @@
-<h1>Available Rooms</h1>
-{% for room in rooms %}
-    <div>
-        <h3>{{ room.name }}</h3>
-        <p>{{ room.description }}</p>
-        <p>Price: {{ room.price_per_night }}</p>
-        <a href="{% url 'create_booking' room.id %}">Book</a>
-    </div>
-{% endfor %}
