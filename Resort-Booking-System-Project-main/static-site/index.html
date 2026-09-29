@@ -8,9 +8,7 @@
 </head>
 <body>
 
-<!-- ============================================================
-     LOGIN PAGE (shown before shell)
-     ============================================================ -->
+
 <div id="page-login" class="page active">
   <div class="login-page">
     <div class="login-panel">
@@ -46,12 +44,10 @@
   </div>
 </div>
 
-<!-- ============================================================
-     MAIN SHELL (all other pages)
-     ============================================================ -->
+
 <div id="shell" class="shell" style="display:none;">
 
-  <!-- Top bar -->
+ 
   <header class="topbar">
     <span class="site-name">Resort Booking System</span>
     <ul class="top-nav">
@@ -66,7 +62,7 @@
 
   <div class="main-area">
 
-    <!-- Sidebar (staff only) -->
+  
     <nav class="sidebar" id="sidebar" style="display:none;">
       <div class="section-label">Overview</div>
       <a href="#" data-page="dashboard"        onclick="navigate('dashboard');return false;">Dashboard</a>
@@ -83,18 +79,14 @@
       <a href="#" data-page="rooms"            onclick="navigate('rooms');return false;">View Rooms</a>
     </nav>
 
-    <!-- Content area -->
     <main class="content" id="content">
 
-      <!-- ======================================================
-           MODULE: Resort Rooms
-           ====================================================== -->
       <div id="page-rooms" class="page">
         <div class="page-header">
           <h1>Resort Rooms &amp; Facilities</h1>
         </div>
 
-        <!-- Tabs: Rooms / Facilities -->
+
         <div class="tabs">
           <button class="tab-btn active"
                   data-tab-btn-group="rooms-tabs" data-tab-btn="room-list"
@@ -104,9 +96,9 @@
                   onclick="switchTab('rooms-tabs','facilities')">Facilities</button>
         </div>
 
-        <!-- Tab: Room list -->
+
         <div class="tab-panel active" data-tab-group="rooms-tabs" data-tab="room-list">
-          <!-- Filter bar -->
+
           <div class="filter-bar">
             <div class="fg">
               <label for="filter-type">Room Type</label>
@@ -131,11 +123,11 @@
           </div>
 
           <div id="rooms-grid" class="room-grid">
-            <!-- Rendered by app.js -->
+     
           </div>
         </div>
 
-        <!-- Tab: Facilities -->
+
         <div class="tab-panel" data-tab-group="rooms-tabs" data-tab="facilities">
           <p style="font-size:0.88rem;color:#5d6d7e;margin-bottom:1.2rem;">
             The following facilities are available to all resort guests during their stay.
@@ -183,11 +175,9 @@
             </div>
           </div>
         </div>
-      </div><!-- /page-rooms -->
+      </div>
 
-      <!-- ======================================================
-           MODULE: Booking
-           ====================================================== -->
+         
       <div id="page-booking" class="page">
         <div class="page-header">
           <h1>New Reservation</h1>
@@ -200,7 +190,7 @@
           <div class="form-panel" style="flex:1;min-width:280px;">
             <h2>Booking Details</h2>
 
-            <!-- Selected room summary -->
+
             <div class="summary-panel" style="margin-bottom:1.2rem;">
               <div class="s-row"><span>Room</span>     <strong id="bk-room-number">—</strong></div>
               <div class="s-row"><span>Name</span>     <span id="bk-room-name">—</span></div>
@@ -246,7 +236,7 @@
                 <textarea id="bk-special" placeholder="e.g. early check-in, dietary requirements, accessibility needs"></textarea>
               </div>
 
-              <!-- Cost summary -->
+         
               <div id="bk-summary-box" class="summary-panel" style="display:none;">
                 <div class="s-row"><span>Nights</span>     <span id="bk-nights-val">—</span></div>
                 <div class="s-row"><span>Rate</span>       <span id="bk-rate-val">—</span></div>
@@ -261,11 +251,8 @@
           </div>
 
         </div>
-      </div><!-- /page-booking -->
-
-      <!-- ======================================================
-           MODULE: Guest Details
-           ====================================================== -->
+      </div>
+              
       <div id="page-guest-details" class="page">
         <div class="page-header">
           <h1>Guest Details</h1>
@@ -332,7 +319,7 @@
             </form>
           </div>
 
-          <!-- Booking summary sidebar -->
+         
           <div style="flex:1;min-width:220px;">
             <div class="card">
               <div class="card-head">Booking Summary</div>
@@ -349,11 +336,8 @@
           </div>
 
         </div>
-      </div><!-- /page-guest-details -->
-
-      <!-- ======================================================
-           MODULE: Payments
-           ====================================================== -->
+      </div>
+      
       <div id="page-payment" class="page">
         <div class="page-header">
           <h1>Payment</h1>
@@ -418,11 +402,8 @@
           </div>
 
         </div>
-      </div><!-- /page-payment -->
-
-      <!-- ======================================================
-           Booking Confirmation
-           ====================================================== -->
+      </div>
+      
       <div id="page-confirmation" class="page">
         <div class="page-header">
           <h1>Booking Confirmed</h1>
@@ -450,11 +431,8 @@
             <button class="btn btn-primary" onclick="navigate('rooms')">Make Another Booking</button>
           </div>
         </div>
-      </div><!-- /page-confirmation -->
-
-      <!-- ======================================================
-           MODULE: Staff Dashboard
-           ====================================================== -->
+      </div>
+      
       <div id="page-dashboard" class="page">
         <div class="page-header">
           <h1>Dashboard</h1>
@@ -549,11 +527,8 @@
             <tbody id="mb-tbody"></tbody>
           </table>
         </div>
-      </div><!-- /page-manage-bookings -->
-
-      <!-- ======================================================
-           MODULE: Manage Guests
-           ====================================================== -->
+      </div>
+      
       <div id="page-manage-guests" class="page">
         <div class="page-header">
           <h1>Guest Records</h1>
@@ -584,11 +559,8 @@
             <tbody id="mg-tbody"></tbody>
           </table>
         </div>
-      </div><!-- /page-manage-guests -->
-
-      <!-- ======================================================
-           MODULE: Manage Payments
-           ====================================================== -->
+      </div>
+      
       <div id="page-manage-payments" class="page">
         <div class="page-header">
           <h1>Payments</h1>
@@ -626,17 +598,14 @@
             <tbody id="mp-tbody"></tbody>
           </table>
         </div>
-      </div><!-- /page-manage-payments -->
-
-      <!-- ======================================================
-           MODULE: Reports
-           ====================================================== -->
+      </div>
+      
       <div id="page-reports" class="page">
         <div class="page-header">
           <h1>Reports &amp; Analytics</h1>
         </div>
 
-        <!-- Summary stats -->
+    
         <div class="stats-row" style="margin-bottom:1.5rem;">
           <div class="stat-box purple">
             <div class="s-label">Total Revenue</div>
@@ -658,7 +627,7 @@
 
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem;">
 
-          <!-- Revenue chart -->
+         
           <div class="card">
             <div class="card-head">Monthly Revenue</div>
             <div class="card-body">
@@ -666,7 +635,6 @@
             </div>
           </div>
 
-          <!-- Bookings by status -->
           <div class="card">
             <div class="card-head">Bookings by Status</div>
             <div class="card-body">
@@ -674,7 +642,7 @@
             </div>
           </div>
 
-          <!-- Room type demand -->
+      
           <div class="card">
             <div class="card-head">Demand by Room Type</div>
             <div class="card-body">
@@ -682,7 +650,7 @@
             </div>
           </div>
 
-          <!-- Seasonal demand note -->
+         
           <div class="card">
             <div class="card-head">Seasonal Demand</div>
             <div class="card-body">
@@ -716,15 +684,15 @@
           </div>
 
         </div>
-      </div><!-- /page-reports -->
+      </div>
 
-    </main><!-- /content -->
-  </div><!-- /main-area -->
-</div><!-- /shell -->
+    </main>
+  </div>
+</div>
 
 <script src="js/app.js"></script>
 <script>
-  // Show login page outside the shell; shell shows after login
+ 
   function showLogin() {
     document.getElementById("shell").style.display = "none";
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
@@ -739,7 +707,7 @@
     navigate("rooms");
   }
 
-  // Patch navigate to also show/hide the shell
+
   const _nav = navigate;
   navigate = function(page, params) {
     if (page === "login") {
