@@ -1,9 +1,4 @@
-/* ============================================================
-   Resort Booking System — Stylesheet
-   Clean, functional, no decorative backgrounds or emojis
-   ============================================================ */
 
-/* ----- Reset & Base ----- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -16,14 +11,14 @@ body {
 
 a { text-decoration: none; color: inherit; }
 
-/* ----- Layout shell ----- */
+
 .shell {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* ----- Top bar ----- */
+
 .topbar {
   background: #2c3e50;
   color: #ecf0f1;
@@ -61,13 +56,11 @@ a { text-decoration: none; color: inherit; }
   color: #ecf0f1;
 }
 
-/* ----- Main area ----- */
 .main-area {
   display: flex;
   flex: 1;
 }
 
-/* ----- Sidebar (staff only) ----- */
 .sidebar {
   width: 200px;
   background: #fff;
@@ -105,18 +98,15 @@ a { text-decoration: none; color: inherit; }
   font-weight: 600;
 }
 
-/* ----- Page content ----- */
 .content {
   flex: 1;
   padding: 1.8rem 2rem;
   overflow-y: auto;
 }
 
-/* ----- Page sections (SPA routing) ----- */
 .page { display: none; }
 .page.active { display: block; }
 
-/* ----- Page header ----- */
 .page-header {
   display: flex;
   align-items: center;
@@ -130,7 +120,7 @@ a { text-decoration: none; color: inherit; }
   color: #2c3e50;
 }
 
-/* ----- Breadcrumb ----- */
+
 .breadcrumb {
   font-size: 0.78rem;
   color: #95a5a6;
@@ -139,7 +129,7 @@ a { text-decoration: none; color: inherit; }
 
 .breadcrumb span { color: #2980b9; }
 
-/* ----- Buttons ----- */
+
 .btn {
   display: inline-block;
   padding: 0.48rem 1.1rem;
@@ -167,7 +157,7 @@ a { text-decoration: none; color: inherit; }
 .btn-sm { padding: 0.3rem 0.75rem; font-size: 0.8rem; }
 .btn-block { width: 100%; display: block; text-align: center; }
 
-/* ----- Card ----- */
+
 .card {
   background: #fff;
   border: 1px solid #dde2e8;
@@ -186,7 +176,7 @@ a { text-decoration: none; color: inherit; }
 
 .card-body { padding: 1.1rem; }
 
-/* ----- Room grid ----- */
+
 .room-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -261,7 +251,6 @@ a { text-decoration: none; color: inherit; }
   margin-bottom: 0.8rem;
 }
 
-/* ----- Availability filter bar ----- */
 .filter-bar {
   display: flex;
   align-items: flex-end;
@@ -285,7 +274,6 @@ a { text-decoration: none; color: inherit; }
   background: #fafbfc;
 }
 
-/* ----- Forms ----- */
 .form-panel {
   background: #fff;
   border: 1px solid #dde2e8;
@@ -358,7 +346,6 @@ a { text-decoration: none; color: inherit; }
   border-top: 1px solid #eee;
 }
 
-/* ----- Alerts ----- */
 .alert {
   padding: 0.7rem 1rem;
   border-radius: 4px;
@@ -372,7 +359,6 @@ a { text-decoration: none; color: inherit; }
 .alert-info    { background: #eaf4fb; color: #1a6cbe; border-color: #aed6f1; }
 .alert-warning { background: #fef9e7; color: #7d6608; border-color: #f9e79f; }
 
-/* ----- Tables ----- */
 .table-panel {
   background: #fff;
   border: 1px solid #dde2e8;
@@ -436,7 +422,6 @@ table tbody tr:hover td { background: #f7f9fa; }
 .badge-unpaid     { background: #fdedec; color: #922b21; }
 .badge-partial    { background: #fef9e7; color: #7d6608; }
 
-/* ----- Stats row ----- */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -478,7 +463,6 @@ table tbody tr:hover td { background: #f7f9fa; }
   margin-top: 0.3rem;
 }
 
-/* ----- Summary panel (booking / payment) ----- */
 .summary-panel {
   background: #f7f9fa;
   border: 1px solid #dde2e8;
@@ -508,7 +492,7 @@ table tbody tr:hover td { background: #f7f9fa; }
   color: #2c3e50;
 }
 
-/* ----- Login page ----- */
+
 .login-page {
   min-height: 100vh;
   display: flex;
@@ -542,7 +526,7 @@ table tbody tr:hover td { background: #f7f9fa; }
   margin-top: 0.3rem;
 }
 
-/* ----- Report charts (pure CSS bar) ----- */
+
 .bar-chart { margin-top: 0.8rem; }
 
 .bar-row {
@@ -574,7 +558,7 @@ table tbody tr:hover td { background: #f7f9fa; }
 
 .bar-val { font-size: 0.82rem; color: #2c3e50; font-weight: 600; width: 50px; text-align: right; flex-shrink: 0; }
 
-/* ----- Tabs ----- */
+
 .tabs {
   display: flex;
   gap: 0;
@@ -601,7 +585,7 @@ table tbody tr:hover td { background: #f7f9fa; }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-/* ----- Facilities section ----- */
+
 .facilities-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -636,10 +620,8 @@ table tbody tr:hover td { background: #f7f9fa; }
   font-weight: 600;
 }
 
-/* ----- Divider ----- */
 .divider { border: none; border-top: 1px solid #eee; margin: 1.2rem 0; }
 
-/* ----- Responsive ----- */
 @media (max-width: 720px) {
   .sidebar { display: none; }
   .content { padding: 1rem; }
