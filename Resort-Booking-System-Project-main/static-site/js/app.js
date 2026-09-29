@@ -1,9 +1,4 @@
-/* =============================================================
-   Resort Booking System — Application Logic
-   Modules: Login, Rooms, Booking, Guest Details, Payments, Reports
-   ============================================================= */
 
-// ── Data store ────────────────────────────────────────────────
 
 const DB = {
 
@@ -48,24 +43,22 @@ const DB = {
   ],
 };
 
-// ── Application state ─────────────────────────────────────────
 
 const APP = {
-  user:          null,        // logged-in user object
+  user:          null,        
   currentPage:   "login",
   selectedRoom:  null,
-  bookingDraft:  null,        // room + dates + guest before payment
+  bookingDraft:  null,       
   guestDraft:    null,
   editGuestId:   null,
 };
 
-// ── Router ────────────────────────────────────────────────────
 
 const GUEST_PAGES  = ["rooms", "booking", "guest-details", "payment", "confirmation"];
 const STAFF_PAGES  = ["dashboard", "manage-bookings", "manage-guests", "manage-payments", "reports"];
 
 function navigate(page, params = {}) {
-  // Auth guard — staff pages require login
+  
   if (STAFF_PAGES.includes(page) && (!APP.user || APP.user.role !== "staff")) {
     navigate("login");
     return;
@@ -74,26 +67,26 @@ function navigate(page, params = {}) {
   APP.currentPage = page;
   Object.assign(APP, params);
 
-  // Show/hide sidebar
+
   const sidebar = document.getElementById("sidebar");
   if (sidebar) sidebar.style.display = STAFF_PAGES.includes(page) ? "block" : "none";
 
-  // Activate page
+ 
   document.querySelectorAll(".page").forEach(el => el.classList.remove("active"));
   const target = document.getElementById("page-" + page);
   if (target) target.classList.add("active");
 
-  // Update sidebar active link
+
   document.querySelectorAll(".sidebar a[data-page]").forEach(a => {
     a.classList.toggle("active", a.dataset.page === page);
   });
 
-  // Update top nav
+
   document.querySelectorAll(".top-nav a[data-page]").forEach(a => {
     a.classList.toggle("active", a.dataset.page === page);
   });
 
-  // Render
+
   const renderers = {
     "rooms":           renderRooms,
     "booking":         renderBooking,
@@ -109,12 +102,12 @@ function navigate(page, params = {}) {
 
   if (renderers[page]) renderers[page]();
 
-  // Scroll top
+
   const content = document.getElementById("content");
   if (content) content.scrollTop = 0;
 }
 
-// ── Auth ──────────────────────────────────────────────────────
+
 
 function submitLogin(e) {
   e.preventDefault();
@@ -159,7 +152,6 @@ function updateTopNav() {
   }
 }
 
-// ── MODULE: Resort Rooms ──────────────────────────────────────
 
 function renderRooms() {
   const typeFilter  = el("filter-type")   ? el("filter-type").value   : "";
@@ -172,7 +164,7 @@ function renderRooms() {
   const grid = el("rooms-grid");
   if (!grid) return;
 
-  // Available rooms only for guests
+
   const display = APP.user ? rooms : rooms.filter(r => r.available);
 
   grid.innerHTML = display.map(room => `
@@ -206,7 +198,6 @@ function selectRoomForBooking(roomId) {
   navigate("booking");
 }
 
-// ── MODULE: Booking ───────────────────────────────────────────
 
 function renderBooking() {
   const room = APP.selectedRoom;
@@ -272,12 +263,10 @@ function submitBooking(e) {
   navigate("guest-details");
 }
 
-// ── MODULE: Guest Details ─────────────────────────────────────
 
 function renderGuestDetails() {
   clearAlert("gd-alert");
 
-  // Pre-fill if returning guest found by email
   el("gd-firstname").value = "";
   el("gd-lastname").value  = "";
   el("gd-email").value     = "";
@@ -334,7 +323,7 @@ function submitGuestDetails(e) {
     showAlert("gd-alert", "Please fill in all required fields.", "error"); return;
   }
 
-  // Upsert guest record
+
   let guest;
   if (APP.editGuestId) {
     guest = DB.guests.find(g => g.id === APP.editGuestId);
@@ -348,7 +337,6 @@ function submitGuestDetails(e) {
   navigate("payment");
 }
 
-// ── MODULE: Payments ──────────────────────────────────────────
 
 function renderPayment() {
   if (!APP.bookingDraft || !APP.guestDraft) { navigate("rooms"); return; }
@@ -389,7 +377,7 @@ function submitPayment(e) {
   const b = APP.bookingDraft;
   const g = APP.guestDraft;
 
-  // Create booking record
+ 
   const newBooking = {
     id:         1000 + DB.bookings.length + 1,
     guestId:    g.id,
@@ -405,7 +393,6 @@ function submitPayment(e) {
   };
   DB.bookings.push(newBooking);
 
-  // Create payment record
   const newPayment = {
     id:        2000 + DB.payments.length + 1,
     bookingId: newBooking.id,
@@ -442,7 +429,6 @@ function renderConfirmation() {
   el("conf-ref").textContent        = py.ref;
 }
 
-// ── MODULE: Staff Dashboard ───────────────────────────────────
 
 function renderDashboard() {
   const total     = DB.bookings.length;
@@ -459,7 +445,7 @@ function renderDashboard() {
   el("dash-revenue").textContent  = "$" + revenue.toLocaleString();
   el("dash-unpaid").textContent   = unpaid;
 
-  // Recent bookings
+ 
   const tbody = el("dash-recent-tbody");
   if (tbody) {
     const recent = [...DB.bookings].slice(-5).reverse();
@@ -478,7 +464,6 @@ function renderDashboard() {
   }
 }
 
-// ── MODULE: Manage Bookings ───────────────────────────────────
 
 function renderManageBookings() {
   const statusFilter = el("mb-filter-status") ? el("mb-filter-status").value : "";
@@ -517,7 +502,6 @@ function updateBookingStatus(bookingId, newStatus) {
 
 function filterBookings() { renderManageBookings(); }
 
-// ── MODULE: Manage Guests ─────────────────────────────────────
 
 function renderManageGuests() {
   const search = el("mg-search") ? el("mg-search").value.toLowerCase() : "";
@@ -556,7 +540,7 @@ function viewGuestBookings(guestId) {
   if (!tbody) { navigate("manage-bookings"); return; }
 
   navigate("manage-bookings");
-  // highlight only this guest
+
   const tb = el("mb-tbody");
   tb.innerHTML = bookings.map(b => {
     const room = DB.rooms.find(r => r.id === b.roomId);
@@ -575,7 +559,6 @@ function viewGuestBookings(guestId) {
   }).join("");
 }
 
-// ── MODULE: Manage Payments ───────────────────────────────────
 
 function renderManagePayments() {
   const statusFilter = el("mp-filter-status") ? el("mp-filter-status").value : "";
@@ -618,10 +601,9 @@ function markPaymentPaid(payId) {
 
 function filterPayments() { renderManagePayments(); }
 
-// ── MODULE: Reports ───────────────────────────────────────────
 
 function renderReports() {
-  // Revenue by month (from payments)
+
   const monthRevenue = {};
   const monthNames   = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   DB.payments.filter(p => p.status === "paid").forEach(p => {
@@ -644,7 +626,6 @@ function renderReports() {
     }).join("");
   }
 
-  // Bookings by status
   const statuses = ["confirmed","pending","checked-in","cancelled"];
   const maxBk = Math.max(...statuses.map(s => DB.bookings.filter(b => b.status === s).length), 1);
   const bkEl = el("report-bookings-chart");
@@ -661,7 +642,7 @@ function renderReports() {
     }).join("");
   }
 
-  // Room type demand
+
   const typeCounts = {};
   DB.bookings.forEach(b => {
     const room = DB.rooms.find(r => r.id === b.roomId);
@@ -680,7 +661,7 @@ function renderReports() {
     }).join("");
   }
 
-  // Totals
+
   const totalRevenue    = DB.payments.filter(p => p.status === "paid").reduce((s, p) => s + p.amount, 0);
   const totalBookings   = DB.bookings.length;
   const avgStay         = DB.bookings.length
@@ -694,10 +675,7 @@ function renderReports() {
   el("rpt-occupancy")    && (el("rpt-occupancy").textContent    = occupancyRate + "%");
 }
 
-// ── Facilities (static) ───────────────────────────────────────
-// No rendering needed — facilities section is static HTML
 
-// ── Tabs ──────────────────────────────────────────────────────
 function switchTab(groupId, tabId) {
   document.querySelectorAll(`[data-tab-group="${groupId}"]`).forEach(p => p.classList.remove("active"));
   document.querySelectorAll(`[data-tab-btn-group="${groupId}"]`).forEach(b => b.classList.remove("active"));
@@ -707,7 +685,7 @@ function switchTab(groupId, tabId) {
   if (btn)   btn.classList.add("active");
 }
 
-// ── Helpers ───────────────────────────────────────────────────
+
 
 function el(id) { return document.getElementById(id); }
 
@@ -750,7 +728,6 @@ function formatCardNumber(input) {
   input.value = val.replace(/(.{4})/g, "$1 ").trim();
 }
 
-// ── Boot ──────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   updateTopNav();
   navigate("login");
